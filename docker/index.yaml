@@ -1,7 +1,7 @@
 %YAML 1.1
 ---
 
-project: roscpp_tutorials
+project: rclcpp_tutorials
 packages:
-    - roscpp_tutorials
+    - examples_rclcpp_minimal_publisher
 
