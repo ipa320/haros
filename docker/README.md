@@ -4,7 +4,7 @@ Install docker https://docs.docker.com/install/linux/docker-ce/ubuntu/
 
 Build the HAROS docker image:
 ```
-cd path-to-folder-that-contains-the-Dockerfile
+cd path-to-haros-repo/docker
 [sudo] docker build --tag=haros .
 ```
 
@@ -24,13 +24,16 @@ or
 can be used.
 
 ### Examples
+
+#### ROS2
+
 ```
-[sudo] docker run -it --mount type=bind,source="$(pwd)"/index.yaml,target=/root/.haros/index.yaml -p 4000:4000 haros:latest /haros_call.sh https://github.com/ros/ros_tutorials/
+[sudo] docker run -it --mount type=bind,source="$(pwd)"/index_ros2.yaml,target=/root/.haros/index.yaml -p 4000:4000 haros:latest /haros_call.sh https://github.com/ros2/examples -b foxy
 ```
 
 or
 
 ```
-[sudo] docker run -it -v "$(pwd)"/index.yaml:/root/.haros/index.yaml -p 4000:4000 haros:latest /haros_call.sh https://github.com/ros/ros_tutorials/
+[sudo] docker run -it -v "$(pwd)"/index_ros2.yaml:/root/.haros/index.yaml -p 4000:4000 haros:latest /haros_call.sh https://github.com/ros2/examples -b foxy
 ```
 Open on your browser the page: http://localhost:4000/
