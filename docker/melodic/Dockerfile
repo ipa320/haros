@@ -17,7 +17,7 @@ ENV LD_LIBRARY_PATH $LD_LIBRARY_PATH:/usr/lib/llvm-4.0/lib
 RUN pip install --upgrade pip
 RUN pip install -Iv clang==4.0
 RUN pip install -e git+https://github.com/timtadh/pyflwor.git#egg=pyflwor
-RUN pip install -e git+https://github.com/ipa-hsd/haros.git@fix_ws#egg=haros
+RUN pip install haros==3.9.3
 RUN pip install bonsai-code
 
 RUN apt-get update && apt-get install -y ros-melodic-desktop
