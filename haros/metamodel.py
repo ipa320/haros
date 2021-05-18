@@ -24,6 +24,11 @@
 # Imports
 ###############################################################################
 
+from __future__ import unicode_literals
+from builtins import str
+from builtins import map
+from past.builtins import basestring
+from builtins import object
 from builtins import range
 from collections import Counter, namedtuple
 from itertools import chain
@@ -109,8 +114,6 @@ class SourceCondition(object):
 
 
 class _UnknownValue(object):
-    __slots__ = ("name", "_call", "_attr", "_fun")
-
     def __init__(self, name, call, attr, fun):
         self.name = name
         self._call = call
@@ -734,7 +737,7 @@ class SourceFile(SourceObject):
         ignore_all = []
         to_ignore = {"*": ignore_all}
         ilp, inlp = self._ignore_parsers()
-        with open(self.path, "r") as handle:
+        with open(self.path, encoding="utf8", errors='ignore') as handle:
             for line in handle:
                 self.lines += 1
                 sline = line.strip()
@@ -1052,8 +1055,8 @@ class Node(SourceObject):
             "writeParam": [p.to_JSON_object() for p in self.write_param],
             "timestamp": self.timestamp,
             "hpl": {
-                "properties": map(str, self.hpl_properties),
-                "assumptions": map(str, self.hpl_assumptions)
+                "properties": list(map(str, self.hpl_properties)),
+                "assumptions": list(map(str, self.hpl_assumptions))
             }
         }
 
@@ -1134,7 +1137,7 @@ class RosName(object):
             i = 1
             prev = "?"
             assert name[1] != "?"
-        for j in xrange(i, n):
+        for j in range(i, n):
             if name[j] == "?":
                 assert prev != "?"
                 if prev == "/":
@@ -1703,7 +1706,7 @@ class Configuration(MetamodelObject):
     def get_remaps(self):
         unique = set()
         for node in self.nodes:
-            unique.update(node.remaps.viewitems())
+            unique.update(node.remaps.items())
         return len(unique)
 
     def get_unresolved(self):
@@ -1757,8 +1760,8 @@ class Configuration(MetamodelObject):
                 "writes": writes
             },
             "hpl": {
-                "properties": map(str, self.hpl_properties),
-                "assumptions": map(str, self.hpl_assumptions)
+                "properties": list(map(str, self.hpl_properties)),
+                "assumptions": list(map(str, self.hpl_assumptions))
             }
         }
 
