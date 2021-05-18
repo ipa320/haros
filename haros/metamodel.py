@@ -737,7 +737,7 @@ class SourceFile(SourceObject):
         ignore_all = []
         to_ignore = {"*": ignore_all}
         ilp, inlp = self._ignore_parsers()
-        with open(self.path, "r") as handle:
+        with open(self.path, encoding="utf8", errors='ignore') as handle:
             for line in handle:
                 self.lines += 1
                 sline = line.strip()
